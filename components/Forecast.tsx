@@ -1,7 +1,7 @@
 import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
 import { ICoord, IForecastResponse } from "../interfaces/IForecastResponse";
-import { getForecast } from "../lib/OpenWeatherAPI";
+import { getForecast } from "../lib/server/OpenWeatherAPI";
 
 function Forecast() {
   const stockholmCoord: ICoord = { lat: 59.33, lon: 18.06 };
