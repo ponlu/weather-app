@@ -1,14 +1,28 @@
 import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
 import { ICoord } from "../interfaces/IForecastResponse";
-import { getForecast } from "../lib/OpenWeatherAPI";
+import { getCoordinatesByZip, getCoordinatesCity, getForecast } from "../lib/OpenWeatherAPI";
 
 function WeatherGrid() {
-  const [coordinates, setCoordinates] = useState<ICoord>({ lat: 59.33, lon: 18.06 }); // Default to Stockholm
+  const stockholmCoord: ICoord = { lat: 59.33, lon: 18.06 };
+  const [coordinates, setCoordinates] = useState<ICoord>(stockholmCoord); // Default to Stockholm
 
-  //   useEffect(() => {}, []);
+  //   useEffect(() => {
+  // //     Load initial weather forecast
+  //   }, [coordinates]);
+
   const handleGetForecastOnClick = async () => {
     const data = await getForecast(coordinates);
+    console.log(data);
+  };
+
+  const handleGetCoordinatesByZipOnClick = async () => {
+    const data = await getCoordinatesByZip("SE", "17266");
+    console.log(data);
+  };
+
+  const handleGetCoordinatesByCityOnClick = async () => {
+    const data = await getCoordinatesCity("Mariefred");
     console.log(data);
   };
 
@@ -19,6 +33,18 @@ function WeatherGrid() {
         className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
       >
         Get weather forecast
+      </button>
+      <button
+        onClick={handleGetCoordinatesByZipOnClick}
+        className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+      >
+        Get coordinates by zip
+      </button>
+      <button
+        onClick={handleGetCoordinatesByCityOnClick}
+        className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+      >
+        Get coordinates by city
       </button>
     </div>
   );

@@ -8,3 +8,15 @@ export async function getForecast(coordinates: ICoord) {
   let { data } = await axios.get<IForecastResponse>(endpoint);
   return data;
 }
+
+export async function getCoordinatesByZip(country: string, zip: string) {
+  let endpoint = `http://api.openweathermap.org/geo/1.0/zip?zip=${zip},${country}&appid=${openWeatherAPIKey}`;
+  let { data } = await axios.get(endpoint);
+  return data;
+}
+
+export async function getCoordinatesCity(city: string, limit = 1) {
+  let endpoint = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=${limit}&appid=${openWeatherAPIKey}`;
+  let { data } = await axios.get(endpoint);
+  return data;
+}
