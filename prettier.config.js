@@ -1,3 +1,5 @@
-export const singleQuote = false;
-export const semi = true;
-export const printWidth = 120;
+module.exports = {
+  singleQuote: false,
+  semi: true,
+  printWidth: 120,
+};
