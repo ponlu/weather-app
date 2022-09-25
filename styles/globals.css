@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.forecast-today {
+  margin: 1rem;
+}
+
+.forecast-today > p {
+  color: white;
+}
+
+.forecast-today > div > p {
+  color: white;
+}
+
+.forecast {
+  margin: 1rem;
+}
+
+.forecast > p {
+  color: white;
+}
+
+.forecast > div > p {
+  color: white;
+}

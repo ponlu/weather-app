@@ -28,7 +28,7 @@ function ForecastCollection({ forecastResponse }: { forecastResponse: IForecastR
   };
 
   return (
-    <div className="grid grid-cols-4 w-3/4  space-x-2 space-y-2">
+    <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 w-3/4 space-x-2 space-y-2">
       {forecastResponse &&
         forecastResponse.list &&
         groupForecastsByDay(forecastResponse.list).map((item, index) => createForecastComponent(item, index))}

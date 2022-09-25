@@ -6,7 +6,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@heroicons/react": "^2.0.11",
     "axios": "^0.27.2",
     "dotenv": "^16.0.2",
     "next": "latest",

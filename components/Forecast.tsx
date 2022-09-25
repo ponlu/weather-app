@@ -1,16 +1,26 @@
-import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
-import { ICity, ICoord, IForecastResponse, IList } from "../interfaces/IForecastResponse";
-import { getForecast } from "../lib/server/OpenWeatherAPI";
+import { IForecast } from "../interfaces/IForecast";
+import { ICity, IList } from "../interfaces/IForecastResponse";
+import { getValuesFromForecast } from "../lib/helper";
 
 function Forecast({ forecasts, city }: { forecasts: IList[]; city: ICity }) {
-  const stockholmCoord: ICoord = { lat: 59.33, lon: 18.06 };
-  const [coordinates, setCoordinates] = useState<ICoord>(stockholmCoord); // Default to Stockholm
-  const [selectedForecast, setSelectedForecast] = useState<IForecastResponse>();
+  const [forecast, setForecast] = useState<IForecast>();
+
+  useEffect(() => {
+    setForecast(getValuesFromForecast(forecasts));
+  }, []);
+
+  function capitalizeFirstLetter(string: string | undefined) {
+    if (!string) return null;
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 
   return (
-    <div className="bg-orange-500 flex outline rounded-lg">
-      <p>{forecasts[0].dt_txt.toString()}</p>
+    <div className="bg-slate-900 bg-gradient-to-tl from-gray-800 flex col-span-1 rounded-lg h-28">
+      <div className="forecast overflow-auto">
+        <p>{forecast?.maxTemperature}°</p>
+        <p>{capitalizeFirstLetter(forecast?.weather.description)}</p>
+      </div>
     </div>
   );
 }
