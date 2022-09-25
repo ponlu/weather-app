@@ -10,8 +10,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="h-screen w-screen overflow-auto bg-gray-900 flex place-content-center">
-        <WeatherGrid />
+      <main className="h-screen w-screen overflow-auto bg-gray-900 flex justify-center">
+        <div className="w-full md:w-192 lg:w-192">
+          <WeatherGrid />
+        </div>
       </main>
 
       <footer className=""></footer>
