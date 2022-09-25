@@ -9,4 +9,5 @@ export interface IForecast {
   pressure: number;
   wind: number;
   weather: IWeather;
+  day: string;
 }
