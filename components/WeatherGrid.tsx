@@ -44,34 +44,34 @@ function WeatherGrid() {
 
   const locationSelectorForm = useForm(changeLocation, initialState);
 
-  const handleGetForecastOnClick = async () => {
-    console.log(selectedCoordinates);
-    const data = await getForecast(selectedCoordinates);
-    console.log(data);
-  };
+  // const handleGetForecastOnClick = async () => {
+  //   console.log(selectedCoordinates);
+  //   const data = await getForecast(selectedCoordinates);
+  //   console.log(data);
+  // };
 
-  const handleGetCoordinatesByZipOnClick = async () => {
-    const coords = await getCoordinatesByZip(locationSelectorForm.values.countryCode, locationSelectorForm.values.zip);
-    console.log(coords);
-    if (coords) {
-      setSelectedCoordinates(coords);
-    } else {
-      console.log("No coordinates found");
-    }
-  };
+  // const handleGetCoordinatesByZipOnClick = async () => {
+  //   const coords = await getCoordinatesByZip(locationSelectorForm.values.countryCode, locationSelectorForm.values.zip);
+  //   console.log(coords);
+  //   if (coords) {
+  //     setSelectedCoordinates(coords);
+  //   } else {
+  //     console.log("No coordinates found");
+  //   }
+  // };
 
-  const handleGetCoordinatesByCityOnClick = async () => {
-    const coords = await getCoordinatesByCity(
-      locationSelectorForm.values.countryCode,
-      locationSelectorForm.values.city
-    );
-    console.log(coords);
-    if (coords) {
-      setSelectedCoordinates(coords);
-    } else {
-      console.log("No coordinates found");
-    }
-  };
+  // const handleGetCoordinatesByCityOnClick = async () => {
+  //   const coords = await getCoordinatesByCity(
+  //     locationSelectorForm.values.countryCode,
+  //     locationSelectorForm.values.city
+  //   );
+  //   console.log(coords);
+  //   if (coords) {
+  //     setSelectedCoordinates(coords);
+  //   } else {
+  //     console.log("No coordinates found");
+  //   }
+  // };
 
   const isNumber = (input: string) => {
     if (input && isNaN(Number(input))) return Number(input);
@@ -79,7 +79,7 @@ function WeatherGrid() {
   };
 
   return (
-    <div className="flex place-items-center justify-between">
+    <div className="flex flex-wrap place-items-center justify-between">
       <div className="flex place-items-center justify-between bg-white">
         {/* <form className="m-2">
           <label htmlFor="search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">
@@ -137,8 +137,8 @@ function WeatherGrid() {
           Get coordinates by city
         </button> */}
 
-        <form onSubmit={locationSelectorForm.onSubmit} className="m-2">
-          <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">
+        <form onSubmit={locationSelectorForm.onSubmit} className="m-2 p-2">
+          <label htmlFor="countries" className="block text-sm font-medium text-gray-900 dark:text-gray-400">
             Select your country
           </label>
 
