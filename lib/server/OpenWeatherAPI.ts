@@ -26,7 +26,7 @@ export async function getCoordinatesByZip(country: string, zip: string): Promise
   }
 }
 
-export async function getCoordinatesByCity(country: string, city: string, limit = 1): Promise<ICoord | null> {
+export async function getCoordinatesByCity(country: string, city: string, limit = 5): Promise<ICoord | null> {
   try {
     let endpoint = `http://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&limit=${limit}&appid=${openWeatherAPIKey}`;
     let { data } = await axios.get<ICityResponse[]>(endpoint);
