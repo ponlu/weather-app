@@ -7,7 +7,7 @@ const openWeatherAPIKey = process.env.OPEN_WEATHER_API_KEY;
 
 export async function getForecast(coordinates: ICoord): Promise<IForecastResponse | null> {
   try {
-    let endpoint = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${openWeatherAPIKey}`;
+    let endpoint = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&appid=${openWeatherAPIKey}`;
     let { data } = await axios.get<IForecastResponse>(endpoint);
     return data;
   } catch (error) {
