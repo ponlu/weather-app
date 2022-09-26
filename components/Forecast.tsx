@@ -4,13 +4,13 @@ import { IForecast } from "../interfaces/IForecast";
 import { ICity, IList } from "../interfaces/IForecastResponse";
 import { capitalizeFirstLetter, getImageFromWeather, getValuesFromForecast } from "../lib/helper";
 
-function Forecast({ forecasts, city }: { forecasts: IList[]; city: ICity }) {
+function Forecast({ forecasts }: { forecasts: IList[] }) {
   const [forecast, setForecast] = useState<IForecast>();
   const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
     setForecast(getValuesFromForecast(forecasts));
-  }, []);
+  }, [forecasts]);
 
   const handleMouseOver = () => {
     setIsHovering(true);

@@ -7,7 +7,7 @@ const Home: NextPage = () => {
     <div>
       <Head>
         <title>Weather App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/clear.png" />
       </Head>
 
       <main className="h-screen w-screen overflow-auto bg-gray-900 flex justify-center">

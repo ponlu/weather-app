@@ -9,7 +9,7 @@ function ForecastToday({ forecasts, city }: { forecasts: IList[]; city: ICity })
 
   useEffect(() => {
     setForecast(getValuesFromForecast(forecasts));
-  }, []);
+  }, [forecasts]);
 
   return (
     <div className="bg-gray-900 bg-gradient-to-tl from-gray-800 col-span-4 rounded-lg h-80 grid grid-cols-2 m-2">

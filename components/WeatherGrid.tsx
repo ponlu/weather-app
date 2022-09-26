@@ -7,47 +7,56 @@ import { getCoordinatesByCity, getForecast } from "../lib/client/InternalAPI";
 import ForecastCollection from "./ForecastCollection";
 
 function WeatherGrid() {
-  const stockholmCoord: ICoord = { lat: 59.33, lon: 18.06 };
-  const [selectedCoordinates, setSelectedCoordinates] = useState<ICoord>(stockholmCoord); // Default to Stockholm
+  const [selectedCoordinates, setSelectedCoordinates] = useState<ICoord | null>(null);
   const [selectedForecast, setSelectedForecast] = useState<IForecastResponse>();
-
-  // useEffect(() => {
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition((position) => {
-  //       setSelectedCoordinates({
-  //         lat: position.coords.latitude,
-  //         lon: position.coords.longitude,
-  //       });
-  //       // getForecast(selectedCoordinates);
-  //     });
-  //   } else {
-  //     // getForecast(selectedCoordinates);
-  //   }
-  // }, []);
+  const malmoCoord: ICoord = { lat: 55.6, lon: 13.0 };
 
   useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setSelectedCoordinates({
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+          });
+        },
+        () => {
+          setSelectedCoordinates(malmoCoord);
+        }
+      );
+    } else {
+      setSelectedCoordinates(malmoCoord);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!selectedCoordinates) return;
     console.log("GETFORCAST!!");
     getForecast(selectedCoordinates).then((forecast) => {
       if (forecast) setSelectedForecast(forecast);
     });
-  }, []);
+  }, [selectedCoordinates]);
 
-  const initialState: { countryCode: string; zip: string; city: string } = {
+  const initialState: { countryCode: string; city: string } = {
     countryCode: "SE",
-    zip: "11120",
     city: "Stockholm",
   };
 
-  const changeLocation = async (country: ICountry, zip: string, city: string) => {
+  const changeLocation = async (country: ICountry, city: string) => {
     console.log(locationSelectorForm.values);
-    // User values to find coordinates and change location using them
+    const coordinates = await getCoordinatesByCity(
+      locationSelectorForm.values.countryCode,
+      locationSelectorForm.values.city
+    );
+    console.log(coordinates);
+    if (coordinates) setSelectedCoordinates(coordinates);
   };
 
   const locationSelectorForm = useForm(changeLocation, initialState);
 
   return (
     <div className="m-2">
-      <form onSubmit={locationSelectorForm.onSubmit} className="flex m-2">
+      <form onSubmit={locationSelectorForm.onSubmit} className="flex m-2 mt-4">
         <select
           id="countries"
           name="countryCode"
@@ -72,9 +81,9 @@ function WeatherGrid() {
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               ></path>
             </svg>
