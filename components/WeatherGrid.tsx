@@ -33,6 +33,7 @@ function WeatherGrid() {
 
   useEffect(() => {
     if (!selectedCoordinates) return;
+    console.log("GETFORECAST!");
     getForecast(selectedCoordinates).then((forecast) => {
       if (forecast) setSelectedForecast(forecast);
     });
