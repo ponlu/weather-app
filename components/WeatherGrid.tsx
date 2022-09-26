@@ -33,17 +33,8 @@ function WeatherGrid() {
 
   useEffect(() => {
     if (!selectedCoordinates) return;
-    console.log("GETFORECAST!");
     getForecast(selectedCoordinates).then((forecast) => {
       if (forecast && forecast.list && forecast.list.length > 0) {
-        console.log(forecast.list.length);
-        try {
-          console.log(forecast.city.name);
-          console.log(forecast.message);
-        } catch (error) {
-          console.log(`Error: ${error}`);
-        }
-
         setSelectedForecast(forecast);
       }
     });
@@ -67,14 +58,14 @@ function WeatherGrid() {
   const locationSelectorForm = useForm(changeLocation, initialState);
 
   return (
-    <div className="m-2">
-      <form onSubmit={locationSelectorForm.onSubmit} className="flex m-2 mt-4">
+    <div>
+      <form onSubmit={locationSelectorForm.onSubmit} className="flex m-2">
         <select
           id="countries"
           name="countryCode"
           defaultValue={locationSelectorForm.values.countryCode}
           onChange={locationSelectorForm.onSelect}
-          className="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg block w-40 p-2.5 mr-2 hover:cursor-pointer"
+          className="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg block w-1/3 p-2.5 mr-2 hover:cursor-pointer"
         >
           {countryList.map((country, index) => (
             <option key={index} value={country.countryCode}>
@@ -82,7 +73,7 @@ function WeatherGrid() {
             </option>
           ))}
         </select>
-        <div className="relative w-full">
+        <div className="relative w-2/3">
           <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
             <svg
               aria-hidden="true"

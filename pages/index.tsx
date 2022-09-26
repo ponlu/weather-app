@@ -4,16 +4,14 @@ import WeatherGrid from "../components/WeatherGrid";
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <div className="h-screen w-screen overflow-auto bg-gray-900 p-2">
       <Head>
         <title>Weather App</title>
-        <link rel="icon" href="/images/clear.png" />
+        <link rel="icon" href="/images/Clear.png" />
       </Head>
 
-      <main className="h-screen w-screen overflow-auto bg-gray-900 flex justify-center">
-        <div className="w-full md:w-144 lg:w-144">
-          <WeatherGrid />
-        </div>
+      <main className="flex justify-center w-full md:w-144 lg:w-144">
+        <WeatherGrid />
       </main>
     </div>
   );

@@ -2,8 +2,6 @@ import { IForecast } from "../interfaces/IForecast";
 import { IList, IMainEnum, IWeather } from "../interfaces/IForecastResponse";
 
 export const getValuesFromForecast = (forecasts: IList[]) => {
-  console.log("GETCALUESFROMFORECAST");
-  console.log(`NUMBER OF FORECASTS = ${forecasts.length}`);
   const tempMaxList = forecasts.map((forecast) => Math.round(forecast.main.temp_max));
   const tempMax = Math.max(...tempMaxList);
 
