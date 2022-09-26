@@ -36,7 +36,13 @@ function WeatherGrid() {
     console.log("GETFORECAST!");
     getForecast(selectedCoordinates).then((forecast) => {
       if (forecast && forecast.list && forecast.list.length > 0) {
-        console.log(forecast);
+        console.log(forecast.list.length);
+        try {
+          console.log(forecast.city.name);
+        } catch (error) {
+          console.log(`Error: ${error}`);
+        }
+
         setSelectedForecast(forecast);
       }
     });
@@ -109,7 +115,7 @@ function WeatherGrid() {
           </button>
         </div>
       </form>
-      {selectedForecast && <ForecastCollection forecastResponse={selectedForecast} />}
+      {selectedForecast != null && <ForecastCollection forecastResponse={selectedForecast} />}
     </div>
   );
 }
