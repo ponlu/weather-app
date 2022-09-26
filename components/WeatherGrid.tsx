@@ -9,7 +9,9 @@ import ForecastCollection from "./ForecastCollection";
 function WeatherGrid() {
   const [selectedCoordinates, setSelectedCoordinates] = useState<ICoord | null>(null);
   const [selectedForecast, setSelectedForecast] = useState<IForecastResponse>();
+  const stockholmCoord: ICoord = { lat: 59.33, lon: 18.06 };
   const malmoCoord: ICoord = { lat: 55.6, lon: 13.0 };
+  const newYorkCoord: ICoord = { lat: 40.73, lon: -73.93 };
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -21,11 +23,11 @@ function WeatherGrid() {
           });
         },
         () => {
-          setSelectedCoordinates(malmoCoord);
+          setSelectedCoordinates(stockholmCoord);
         }
       );
     } else {
-      setSelectedCoordinates(malmoCoord);
+      setSelectedCoordinates(stockholmCoord);
     }
   }, []);
 
