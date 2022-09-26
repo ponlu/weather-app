@@ -1,33 +1,28 @@
 import { useEffect, useState } from "react";
 import { countryList } from "../lib/countryList";
 import { useForm } from "../hooks/UseForm";
-import { ICountry } from "../interfaces/ICountry";
 import { ICoord, IForecastResponse } from "../interfaces/IForecastResponse";
 import { getCoordinatesByCity, getForecast } from "../lib/client/InternalAPI";
 import ForecastCollection from "./ForecastCollection";
 
-function WeatherGrid() {
-  const [selectedCoordinates, setSelectedCoordinates] = useState<ICoord | null>(null);
-  const [selectedForecast, setSelectedForecast] = useState<IForecastResponse | null>(null);
-  const stockholmCoord: ICoord = { lat: 59.33, lon: 18.06 };
-  const malmoCoord: ICoord = { lat: 55.6, lon: 13.0 };
-  const newYorkCoord: ICoord = { lat: 40.73, lon: -73.93 };
+function LandingPage({
+  initialForecast,
+  initialCoordinates,
+}: {
+  initialForecast: IForecastResponse | null;
+  initialCoordinates: ICoord;
+}) {
+  const [selectedCoordinates, setSelectedCoordinates] = useState<ICoord | null>(initialCoordinates);
+  const [selectedForecast, setSelectedForecast] = useState<IForecastResponse | null>(initialForecast);
 
   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setSelectedCoordinates({
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-          });
-        },
-        () => {
-          setSelectedCoordinates(stockholmCoord);
-        }
-      );
-    } else {
-      setSelectedCoordinates(stockholmCoord);
+    if (navigator && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setSelectedCoordinates({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        });
+      });
     }
   }, []);
 
@@ -40,22 +35,17 @@ function WeatherGrid() {
     });
   }, [selectedCoordinates]);
 
-  const initialState: { countryCode: string; city: string } = {
+  const initialFormState: { countryCode: string; city: string } = {
     countryCode: "SE",
     city: "Stockholm",
   };
 
-  const changeLocation = async (country: ICountry, city: string) => {
-    console.log(locationSelectorForm.values);
-    const coordinates = await getCoordinatesByCity(
-      locationSelectorForm.values.countryCode,
-      locationSelectorForm.values.city
-    );
-    console.log(coordinates);
+  const changeLocation = async (countryCode: string, city: string) => {
+    const coordinates = await getCoordinatesByCity(countryCode, city);
     if (coordinates) setSelectedCoordinates(coordinates);
   };
 
-  const locationSelectorForm = useForm(changeLocation, initialState);
+  const locationSelectorForm = useForm(changeLocation, initialFormState);
 
   return (
     <div>
@@ -112,4 +102,4 @@ function WeatherGrid() {
   );
 }
 
-export default WeatherGrid;
+export default LandingPage;
