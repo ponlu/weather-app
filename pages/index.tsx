@@ -15,8 +15,6 @@ const Home: NextPage = () => {
           <WeatherGrid />
         </div>
       </main>
-
-      <footer className=""></footer>
     </div>
   );
 };
