@@ -39,6 +39,7 @@ function WeatherGrid() {
         console.log(forecast.list.length);
         try {
           console.log(forecast.city.name);
+          console.log(forecast.message);
         } catch (error) {
           console.log(`Error: ${error}`);
         }
