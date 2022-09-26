@@ -8,7 +8,7 @@ import ForecastCollection from "./ForecastCollection";
 
 function WeatherGrid() {
   const [selectedCoordinates, setSelectedCoordinates] = useState<ICoord | null>(null);
-  const [selectedForecast, setSelectedForecast] = useState<IForecastResponse>();
+  const [selectedForecast, setSelectedForecast] = useState<IForecastResponse | null>(null);
   const stockholmCoord: ICoord = { lat: 59.33, lon: 18.06 };
   const malmoCoord: ICoord = { lat: 55.6, lon: 13.0 };
   const newYorkCoord: ICoord = { lat: 40.73, lon: -73.93 };
@@ -35,7 +35,7 @@ function WeatherGrid() {
     if (!selectedCoordinates) return;
     console.log("GETFORECAST!");
     getForecast(selectedCoordinates).then((forecast) => {
-      if (forecast) setSelectedForecast(forecast);
+      if (forecast && forecast.list && forecast.list.length > 0) setSelectedForecast(forecast);
     });
   }, [selectedCoordinates]);
 
