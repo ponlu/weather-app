@@ -35,7 +35,10 @@ function WeatherGrid() {
     if (!selectedCoordinates) return;
     console.log("GETFORECAST!");
     getForecast(selectedCoordinates).then((forecast) => {
-      if (forecast && forecast.list && forecast.list.length > 0) setSelectedForecast(forecast);
+      if (forecast && forecast.list && forecast.list.length > 0) {
+        console.log(forecast);
+        setSelectedForecast(forecast);
+      }
     });
   }, [selectedCoordinates]);
 
