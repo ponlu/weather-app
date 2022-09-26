@@ -8,7 +8,9 @@ function ForecastToday({ forecasts, city, selected }: { forecasts: IList[]; city
   const [isSelected, setSelected] = useState<boolean>(false);
 
   useEffect(() => {
-    setForecast(getValuesFromForecast(forecasts));
+    if (forecasts.length > 0) {
+      setForecast(getValuesFromForecast(forecasts));
+    }
   }, [forecasts]);
 
   useEffect(() => {
