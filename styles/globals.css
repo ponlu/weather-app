@@ -25,3 +25,11 @@
 .forecast > div > p {
   color: white;
 }
+
+.forecastlist {
+  width: 100%;
+}
+
+.forecastlist > div {
+  cursor: pointer;
+}

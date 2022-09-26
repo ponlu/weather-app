@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { countryList } from "../lib/countryList";
 import { useForm } from "../hooks/UseForm";
 import { ICountry } from "../interfaces/ICountry";
@@ -33,7 +33,6 @@ function WeatherGrid() {
 
   useEffect(() => {
     if (!selectedCoordinates) return;
-    console.log("GETFORCAST!!");
     getForecast(selectedCoordinates).then((forecast) => {
       if (forecast) setSelectedForecast(forecast);
     });

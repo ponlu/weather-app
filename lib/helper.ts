@@ -55,6 +55,7 @@ export const getImageFromWeather = (weather: string | undefined) => {
   if (weather === IMainEnum.Clear) return "/images/Clear.png";
   if (weather === IMainEnum.Clouds) return "/images/Clouds.png";
   if (weather === IMainEnum.Rain) return "/images/Rain.png";
+  if (weather === IMainEnum.Snow) return "/images/Snow.png";
   return "/images/Clear.png";
 };
 

@@ -33,6 +33,7 @@ export interface IList {
   sys: ISys;
   dt_txt: Date;
   rain?: IRain;
+  snow?: ISnow;
 }
 
 export interface IClouds {
@@ -52,6 +53,10 @@ export interface IMainClass {
 }
 
 export interface IRain {
+  "3h": number;
+}
+
+export interface ISnow {
   "3h": number;
 }
 
@@ -76,6 +81,7 @@ export enum IDescription {
   ClearSky = "clear sky",
   FewClouds = "few clouds",
   LightRain = "light rain",
+  LightSnow = "light snow",
   OvercastClouds = "overcast clouds",
   ScatteredClouds = "scattered clouds",
 }
@@ -84,6 +90,7 @@ export enum IMainEnum {
   Clear = "Clear",
   Clouds = "Clouds",
   Rain = "Rain",
+  Snow = "Snow",
 }
 
 export interface IWind {

@@ -11,7 +11,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className="h-screen w-screen overflow-auto bg-gray-900 flex justify-center">
-        <div className="w-full md:w-192 lg:w-192">
+        <div className="w-full md:w-144 lg:w-144">
           <WeatherGrid />
         </div>
       </main>
