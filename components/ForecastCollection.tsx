@@ -24,11 +24,11 @@ function ForecastCollection({ forecastResponse }: { forecastResponse: IForecastR
 
   return (
     <div className="forecastlist">
+      <h1 className="text-white text-center text-3xl">{forecastResponse.city.name}</h1>
       {upcomingForecast.map((forecastList, index) => (
         <Forecast
           key={forecastList[0].dt}
           forecasts={forecastList}
-          city={forecastResponse.city}
           selected={selectedDay === index + 1}
           setSelected={() => setSelectedDay(index + 1)}
         />

@@ -10,7 +10,15 @@
   color: white;
 }
 
+.forecast-today > span {
+  color: white;
+}
+
 .forecast-today > div > p {
+  color: white;
+}
+
+.forecast-today > div > span {
   color: white;
 }
 

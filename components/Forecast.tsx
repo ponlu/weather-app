@@ -1,14 +1,12 @@
-import { ICity, IForecastList } from "../interfaces/IForecastResponse";
+import { IForecastList } from "../interfaces/IForecastResponse";
 import { capitalizeFirstLetter, getImageFromWeather, getValuesFromForecast } from "../lib/helper";
 
 function Forecast({
   forecasts,
-  city,
   selected,
   setSelected,
 }: {
   forecasts: IForecastList[];
-  city: ICity;
   selected: boolean;
   setSelected: () => void;
 }) {
@@ -22,7 +20,6 @@ function Forecast({
       onClick={() => setSelected()}
     >
       <div className="forecast-today flex flex-col items-center place-content-center overflow-hidden">
-        {selected && <p>{city.name}</p>}
         <p>{selectedForecast?.day} </p>
         <p>{capitalizeFirstLetter(selectedForecast?.weather.description)}</p>
         <p className={`${selected ? "font-bold" : ""}`}>{selectedForecast?.maxTemperature}°</p>
