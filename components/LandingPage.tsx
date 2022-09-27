@@ -15,16 +15,16 @@ function LandingPage({
   const [selectedCoordinates, setSelectedCoordinates] = useState<ICoord | null>(initialCoordinates);
   const [selectedForecast, setSelectedForecast] = useState<IForecastResponse | null>(initialForecast);
 
-  // useEffect(() => {
-  //   if (navigator && navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition((position) => {
-  //       setSelectedCoordinates({
-  //         lat: position.coords.latitude,
-  //         lon: position.coords.longitude,
-  //       });
-  //     });
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (navigator && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setSelectedCoordinates({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        });
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (!selectedCoordinates) return;

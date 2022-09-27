@@ -28,7 +28,7 @@ export default Home;
 
 export async function getServerSideProps(): Promise<{ props: InitialProps }> {
   const forecast = await getForecast(stockholmCoord);
-
+  console.log(`Antal forecasts: ${forecast?.list.length}`);
   return {
     props: {
       forecast,
