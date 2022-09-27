@@ -8,16 +8,16 @@ import ForecastCollection from "./ForecastCollection";
 function LandingPage({ initialForecast }: { initialForecast: IForecastResponse | null }) {
   const [selectedForecast, setSelectedForecast] = useState<IForecastResponse | null>(initialForecast);
 
-  useEffect(() => {
-    if (navigator && navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        changeForecast({
-          lat: position.coords.latitude,
-          lon: position.coords.longitude,
-        });
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (navigator && navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition((position) => {
+  //       changeForecast({
+  //         lat: position.coords.latitude,
+  //         lon: position.coords.longitude,
+  //       });
+  //     });
+  //   }
+  // }, []);
 
   const initialFormState: { countryCode: string; city: string } = {
     countryCode: "SE",

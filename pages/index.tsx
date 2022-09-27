@@ -8,7 +8,6 @@ interface InitialProps {
   forecast: IForecastResponse | null;
 }
 
-const stockholmCoord: ICoord = { lat: 59.33, lon: 18.06 };
 const Home: NextPage<InitialProps> = ({ forecast }) => {
   return (
     <div className="h-screen w-screen overflow-auto bg-gray-900 p-2 flex justify-center">
@@ -26,6 +25,7 @@ const Home: NextPage<InitialProps> = ({ forecast }) => {
 
 export default Home;
 
+const stockholmCoord: ICoord = { lat: 59.33, lon: 18.06 };
 export async function getServerSideProps(): Promise<{ props: InitialProps }> {
   const forecast = await getForecast(stockholmCoord);
 

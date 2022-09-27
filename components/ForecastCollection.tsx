@@ -18,7 +18,7 @@ function ForecastCollection({ forecastResponse }: { forecastResponse: IForecastR
     <div className="forecastlist">
       {upcomingForecast.map((forecast, index) => (
         <Forecast
-          key={index}
+          key={forecast[0].dt}
           forecasts={forecast}
           city={forecastResponse.city}
           selected={selectedDay === index + 1}
