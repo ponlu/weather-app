@@ -18,7 +18,7 @@ const Home: NextPage<InitialProps> = ({ forecast }) => {
       </Head>
 
       <main className="w-full md:w-144 lg:w-144">
-        <LandingPage initialForecast={forecast} initialCoordinates={stockholmCoord} />
+        <LandingPage initialForecast={forecast} />
       </main>
     </div>
   );

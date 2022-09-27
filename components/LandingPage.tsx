@@ -5,36 +5,19 @@ import { ICoord, IForecastResponse } from "../interfaces/IForecastResponse";
 import { getCoordinatesByCity, getForecast } from "../lib/client/InternalAPI";
 import ForecastCollection from "./ForecastCollection";
 
-function LandingPage({
-  initialForecast,
-  initialCoordinates,
-}: {
-  initialForecast: IForecastResponse | null;
-  initialCoordinates: ICoord;
-}) {
-  const [selectedCoordinates, setSelectedCoordinates] = useState<ICoord | null>(initialCoordinates);
+function LandingPage({ initialForecast }: { initialForecast: IForecastResponse | null }) {
   const [selectedForecast, setSelectedForecast] = useState<IForecastResponse | null>(initialForecast);
 
   useEffect(() => {
-    console.log(`Antal forecasts: ${initialForecast?.list.length}`);
     if (navigator && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        setSelectedCoordinates({
+        changeForecast({
           lat: position.coords.latitude,
           lon: position.coords.longitude,
         });
       });
     }
   }, []);
-
-  useEffect(() => {
-    if (!selectedCoordinates) return;
-    getForecast(selectedCoordinates).then((forecast) => {
-      if (forecast && forecast.list && forecast.list.length > 0) {
-        setSelectedForecast(forecast);
-      }
-    });
-  }, [selectedCoordinates]);
 
   const initialFormState: { countryCode: string; city: string } = {
     countryCode: "SE",
@@ -43,7 +26,15 @@ function LandingPage({
 
   const changeLocation = async (countryCode: string, city: string) => {
     const coordinates = await getCoordinatesByCity(countryCode, city);
-    if (coordinates) setSelectedCoordinates(coordinates);
+    if (coordinates) changeForecast(coordinates);
+  };
+
+  const changeForecast = (coordinates: ICoord) => {
+    getForecast(coordinates).then((forecast) => {
+      if (forecast && forecast.list && forecast.list.length > 0) {
+        setSelectedForecast(forecast);
+      }
+    });
   };
 
   const locationSelectorForm = useForm(changeLocation, initialFormState);
