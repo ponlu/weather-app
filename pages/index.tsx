@@ -10,7 +10,7 @@ interface InitialProps {
 
 const Home: NextPage<InitialProps> = ({ forecast }) => {
   return (
-    <div className="h-screen w-screen overflow-auto bg-gray-900 p-2 flex justify-center">
+    <div className="min-h-screen w-screen overflow-auto bg-gray-900 p-2 flex justify-center">
       <Head>
         <title>Weather App</title>
         <link rel="icon" href="/images/Clear.png" />
