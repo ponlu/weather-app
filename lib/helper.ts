@@ -25,12 +25,12 @@ export const getValuesFromForecast = (forecasts: IForecastList[]) => {
     .reduce((a, b) => a + b, 0)
     .toFixed(2);
 
-  let weather = forecasts.find((forecast) => new Date(forecast.dt_txt).getHours() === 15)?.weather[0];
+  let weather = forecasts.find((forecast) => getIPhoneFormattedDate(forecast.dt_txt).getHours() === 15)?.weather[0];
   if (!weather) {
     weather = forecasts[0].weather[0];
   }
 
-  const day = dateToWeekDay(new Date(forecasts[0].dt_txt));
+  const day = dateToWeekDay(getIPhoneFormattedDate(forecasts[0].dt_txt));
 
   const forecast: IForecast = {
     maxTemperature: tempMax,
@@ -70,7 +70,7 @@ export const addDays = (date: Date, days: number) => {
   return newDate;
 };
 
-export const convertDateToIPhoneFormat = (dateString: string) => {
+export const getIPhoneFormattedDate = (dateString: string) => {
   const arr = dateString.split(/[- :]/).map((value) => Number(value));
   return new Date(arr[0], arr[1] - 1, arr[2], arr[3], arr[4], arr[5]);
 };
