@@ -1,4 +1,4 @@
-import { ICity, IList } from "../interfaces/IForecastResponse";
+import { ICity, IForecastList } from "../interfaces/IForecastResponse";
 import { capitalizeFirstLetter, getImageFromWeather, getValuesFromForecast } from "../lib/helper";
 
 function Forecast({
@@ -7,7 +7,7 @@ function Forecast({
   selected,
   setSelected,
 }: {
-  forecasts: IList[];
+  forecasts: IForecastList[];
   city: ICity;
   selected: boolean;
   setSelected: () => void;

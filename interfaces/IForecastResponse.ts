@@ -2,7 +2,7 @@ export interface IForecastResponse {
   cod: string;
   message: number;
   cnt: number;
-  list: IList[];
+  list: IForecastList[];
   city: ICity;
 }
 
@@ -22,7 +22,7 @@ export interface ICoord {
   lon: number;
 }
 
-export interface IList {
+export interface IForecastList {
   dt: number;
   main: IMainClass;
   weather: IWeather[];

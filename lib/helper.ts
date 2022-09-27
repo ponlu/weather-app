@@ -1,7 +1,7 @@
 import { IForecast } from "../interfaces/IForecast";
-import { IList, IMainEnum, IWeather } from "../interfaces/IForecastResponse";
+import { IForecastList, IMainEnum, IWeather } from "../interfaces/IForecastResponse";
 
-export const getValuesFromForecast = (forecasts: IList[]) => {
+export const getValuesFromForecast = (forecasts: IForecastList[]) => {
   const tempMaxList = forecasts.map((forecast) => Math.round(forecast.main.temp_max));
   const tempMax = Math.max(...tempMaxList);
 

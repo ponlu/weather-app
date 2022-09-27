@@ -1,9 +1,9 @@
-import { IList } from "./IForecastResponse";
+import { IForecastList } from "./IForecastResponse";
 
 export interface IUpcomingForecasts {
-  day1: IList[];
-  day2: IList[];
-  day3: IList[];
-  day4: IList[];
-  day5: IList[];
+  day1: IForecastList[];
+  day2: IForecastList[];
+  day3: IForecastList[];
+  day4: IForecastList[];
+  day5: IForecastList[];
 }
