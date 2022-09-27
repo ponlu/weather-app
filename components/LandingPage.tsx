@@ -29,12 +29,11 @@ function LandingPage({ initialForecast }: { initialForecast: IForecastResponse |
     if (coordinates) changeForecast(coordinates);
   };
 
-  const changeForecast = (coordinates: ICoord) => {
-    getForecast(coordinates).then((forecast) => {
-      if (forecast && forecast.list && forecast.list.length > 0) {
-        setSelectedForecast(forecast);
-      }
-    });
+  const changeForecast = async (coordinates: ICoord) => {
+    const forecast = await getForecast(coordinates);
+    if (forecast && forecast.list && forecast.list.length > 0) {
+      setSelectedForecast(forecast);
+    }
   };
 
   const locationSelectorForm = useForm(changeLocation, initialFormState);
@@ -89,7 +88,9 @@ function LandingPage({ initialForecast }: { initialForecast: IForecastResponse |
           </button>
         </div>
       </form>
-      {selectedForecast != null && <ForecastCollection forecastResponse={selectedForecast} />}
+      {selectedForecast != null && selectedForecast.list && selectedForecast.list.length > 0 && (
+        <ForecastCollection forecastResponse={selectedForecast} />
+      )}
     </div>
   );
 }
