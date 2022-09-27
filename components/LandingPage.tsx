@@ -16,6 +16,7 @@ function LandingPage({
   const [selectedForecast, setSelectedForecast] = useState<IForecastResponse | null>(initialForecast);
 
   useEffect(() => {
+    console.log(`Antal forecasts: ${initialForecast?.list.length}`);
     if (navigator && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         setSelectedCoordinates({
