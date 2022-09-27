@@ -24,7 +24,7 @@ function LandingPage({ initialForecast }: { initialForecast: IForecastResponse |
     city: "Stockholm",
   };
 
-  const changeLocation = async (countryCode: string, city: string) => {
+  const changeLocation = async ({ countryCode, city }: { countryCode: string; city: string }) => {
     const coordinates = await getCoordinatesByCity(countryCode, city);
     if (coordinates) changeForecast(coordinates);
   };
