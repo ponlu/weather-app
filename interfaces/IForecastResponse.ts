@@ -31,7 +31,7 @@ export interface IForecastList {
   visibility: number;
   pop: number;
   sys: ISys;
-  dt_txt: Date;
+  dt_txt: string;
   rain?: IRain;
   snow?: ISnow;
 }

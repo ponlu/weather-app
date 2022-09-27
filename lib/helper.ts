@@ -69,3 +69,8 @@ export const addDays = (date: Date, days: number) => {
   newDate.setDate(newDate.getDate() + days);
   return newDate;
 };
+
+export const convertDateToIPhoneFormat = (dateString: string) => {
+  const arr = dateString.split(/[- :]/).map((value) => Number(value));
+  return new Date(arr[0], arr[1] - 1, arr[2], arr[3], arr[4], arr[5]);
+};

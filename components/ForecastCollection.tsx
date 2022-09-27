@@ -1,26 +1,24 @@
 import { useState } from "react";
 import { IForecastResponse, IForecastList } from "../interfaces/IForecastResponse";
-import { addDays } from "../lib/helper";
+import { addDays, convertDateToIPhoneFormat } from "../lib/helper";
 import Forecast from "./Forecast";
 
 function ForecastCollection({ forecastResponse }: { forecastResponse: IForecastResponse }) {
-  const day1 = new Date(forecastResponse.list[0].dt_txt);
-
-  forecastResponse.list.map((forecast, index) => {
-    if (!forecast) {
-      console.error(`FEL I FORECAST NR: ${index}`);
-    }
-  });
-
+  const day1 = convertDateToIPhoneFormat(forecastResponse.list[0].dt_txt);
   const upcomingForecast: IForecastList[][] = [
-    [forecastResponse.list[0]],
-    [forecastResponse.list[10]],
-    // forecastResponse.list.filter((forecast) => new Date(forecast.dt_txt).getDate() === day1.getDate()),
-    // forecastResponse.list.filter((forecast) => new Date(forecast.dt_txt).getDate() === day1.getDate()),
-    // forecastResponse.list.filter((forecast) => new Date(forecast.dt_txt).getDate() === addDays(day1, 1).getDate()),
-    // forecastResponse.list.filter((forecast) => new Date(forecast.dt_txt).getDate() === addDays(day1, 2).getDate()),
-    // forecastResponse.list.filter((forecast) => new Date(forecast.dt_txt).getDate() === addDays(day1, 3).getDate()),
-    // forecastResponse.list.filter((forecast) => new Date(forecast.dt_txt).getDate() === addDays(day1, 4).getDate()),
+    forecastResponse.list.filter((forecast) => convertDateToIPhoneFormat(forecast.dt_txt).getDate() === day1.getDate()),
+    forecastResponse.list.filter(
+      (forecast) => convertDateToIPhoneFormat(forecast.dt_txt).getDate() === addDays(day1, 1).getDate()
+    ),
+    forecastResponse.list.filter(
+      (forecast) => convertDateToIPhoneFormat(forecast.dt_txt).getDate() === addDays(day1, 2).getDate()
+    ),
+    forecastResponse.list.filter(
+      (forecast) => convertDateToIPhoneFormat(forecast.dt_txt).getDate() === addDays(day1, 3).getDate()
+    ),
+    forecastResponse.list.filter(
+      (forecast) => convertDateToIPhoneFormat(forecast.dt_txt).getDate() === addDays(day1, 4).getDate()
+    ),
   ];
   const [selectedDay, setSelectedDay] = useState(1);
 
