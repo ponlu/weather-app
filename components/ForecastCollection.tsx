@@ -3,23 +3,19 @@ import { IForecastResponse, IForecastList } from "../interfaces/IForecastRespons
 import { addDays, getIPhoneFormattedDate } from "../lib/helper";
 import Forecast from "./Forecast";
 
+const FORECAST_DAYS = 5;
+
 function ForecastCollection({ forecastResponse }: { forecastResponse: IForecastResponse }) {
   const day1 = getIPhoneFormattedDate(forecastResponse.list[0].dt_txt);
-  const upcomingForecast: IForecastList[][] = [
-    forecastResponse.list.filter((forecast) => getIPhoneFormattedDate(forecast.dt_txt).getDate() === day1.getDate()),
-    forecastResponse.list.filter(
-      (forecast) => getIPhoneFormattedDate(forecast.dt_txt).getDate() === addDays(day1, 1).getDate()
-    ),
-    forecastResponse.list.filter(
-      (forecast) => getIPhoneFormattedDate(forecast.dt_txt).getDate() === addDays(day1, 2).getDate()
-    ),
-    forecastResponse.list.filter(
-      (forecast) => getIPhoneFormattedDate(forecast.dt_txt).getDate() === addDays(day1, 3).getDate()
-    ),
-    forecastResponse.list.filter(
-      (forecast) => getIPhoneFormattedDate(forecast.dt_txt).getDate() === addDays(day1, 4).getDate()
-    ),
-  ];
+
+  const upcomingForecast: IForecastList[][] = new Array(FORECAST_DAYS)
+    .fill(0)
+    .map((_, index) =>
+      forecastResponse.list.filter(
+        (forecast) => getIPhoneFormattedDate(forecast.dt_txt).getDate() === addDays(day1, index).getDate()
+      )
+    );
+
   const [selectedDay, setSelectedDay] = useState(1);
 
   return (
