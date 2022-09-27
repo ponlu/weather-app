@@ -12,22 +12,19 @@ function ForecastCollection({ forecastResponse }: { forecastResponse: IForecastR
     forecastResponse.list.filter((forecast) => new Date(forecast.dt_txt).getDate() === addDays(day1, 3).getDate()),
     forecastResponse.list.filter((forecast) => new Date(forecast.dt_txt).getDate() === addDays(day1, 4).getDate()),
   ];
-
   const [selectedDay, setSelectedDay] = useState(1);
 
   return (
     <div className="forecastlist">
-      {upcomingForecast &&
-        upcomingForecast.length > 0 &&
-        upcomingForecast.map((forecast, index) => (
-          <Forecast
-            key={forecast[0].dt}
-            forecasts={forecast}
-            city={forecastResponse.city}
-            selected={selectedDay === index + 1}
-            setSelected={() => setSelectedDay(index + 1)}
-          />
-        ))}
+      {upcomingForecast.map((forecast, index) => (
+        <Forecast
+          key={forecast[0].dt}
+          forecasts={forecast}
+          city={forecastResponse.city}
+          selected={selectedDay === index + 1}
+          setSelected={() => setSelectedDay(index + 1)}
+        />
+      ))}
     </div>
   );
 }

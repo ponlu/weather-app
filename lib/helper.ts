@@ -66,6 +66,7 @@ const dateToWeekDay = (date: Date) => {
 };
 
 export const addDays = (date: Date, days: number) => {
-  date.setDate(date.getDate() + days);
-  return date;
+  let newDate = new Date(date);
+  newDate.setDate(newDate.getDate() + days);
+  return newDate;
 };
