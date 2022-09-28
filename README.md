@@ -1,7 +1,7 @@
 # Weather app
 
 This is a weather app built in Next.js with Tailwind CSS and hosted on Vercel. The project is managed on Trello
-[Link to board](https://trello.com/b/3g0e5DSb). Commits respond to Trello card numbers.
+[(Link to board)](https://trello.com/b/3g0e5DSb). Commits correspond to Trello card numbers.
 
 ## How to use
 
