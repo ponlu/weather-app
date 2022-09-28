@@ -19,7 +19,7 @@ function Forecast({
       }`}
       onClick={() => setSelected()}
     >
-      <div className="forecast-today flex flex-col items-center place-content-center overflow-hidden">
+      <div className="forecast flex flex-col items-center place-content-center overflow-hidden">
         <p>{selectedForecast?.day} </p>
         <p>{capitalizeFirstLetter(selectedForecast?.weather.description)}</p>
         <p className={`${selected && "font-bold"}`}>{selectedForecast?.maxTemperature}°</p>
