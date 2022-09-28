@@ -11,6 +11,7 @@ export async function getForecast(coordinates: ICoord): Promise<IForecastRespons
     let { data } = await axios.get<IForecastResponse>(endpoint);
     return data;
   } catch (error) {
+    console.error(error);
     return null;
   }
 }
@@ -22,6 +23,7 @@ export async function getCoordinatesByZip(country: string, zip: string): Promise
     if (data) return { lat: data.lat, lon: data.lon };
     return null;
   } catch (error) {
+    console.error(error);
     return null;
   }
 }
@@ -33,6 +35,7 @@ export async function getCoordinatesByCity(country: string, city: string, limit 
     if (data && data.length > 0) return { lat: data[0].lat, lon: data[0].lon };
     return null;
   } catch (error) {
+    console.error(error);
     return null;
   }
 }

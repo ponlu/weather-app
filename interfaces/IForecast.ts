@@ -1,6 +1,6 @@
 import { IWeather } from "./IForecastResponse";
 
-export interface IForecast {
+export interface IForecastDisplay {
   maxTemperature: number;
   minTemperature: number;
   feelsLike: number;

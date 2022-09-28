@@ -5,8 +5,14 @@ import { ICoord, IForecastResponse } from "../interfaces/IForecastResponse";
 import { getCoordinatesByCity, getForecast } from "../lib/client/InternalAPI";
 import ForecastCollection from "./ForecastCollection";
 
+const initialFormState: { countryCode: string; city: string } = {
+  countryCode: "SE",
+  city: "",
+};
+
 function LandingPage({ initialForecast }: { initialForecast: IForecastResponse | null }) {
   const [selectedForecast, setSelectedForecast] = useState<IForecastResponse | null>(initialForecast);
+  const [invalidInput, setInvalidInput] = useState(false);
 
   useEffect(() => {
     if (navigator && navigator.geolocation) {
@@ -17,16 +23,20 @@ function LandingPage({ initialForecast }: { initialForecast: IForecastResponse |
         });
       });
     }
-  }, []);
-
-  const initialFormState: { countryCode: string; city: string } = {
-    countryCode: "SE",
-    city: "Stockholm",
-  };
+  }, []); // Only ask for user location once on load
 
   const changeLocation = async ({ countryCode, city }: { countryCode: string; city: string }) => {
     const coordinates = await getCoordinatesByCity(countryCode, city);
-    if (coordinates) changeForecast(coordinates);
+    if (coordinates) {
+      changeForecast(coordinates);
+      locationSelectorForm.setFormValues({
+        city: "",
+        countryCode: locationSelectorForm.values.countryCode,
+      });
+      setInvalidInput(false);
+    } else {
+      setInvalidInput(true);
+    }
   };
 
   const changeForecast = async (coordinates: ICoord) => {
@@ -76,8 +86,11 @@ function LandingPage({ initialForecast }: { initialForecast: IForecastResponse |
             type="search"
             id="search"
             name="city"
+            value={locationSelectorForm.values.city}
             onChange={locationSelectorForm.onChange}
-            className="block p-4 pl-10 w-full text-sm text-white bg-gray-700 rounded-lg border border-gray-600 placeholder-gray-400"
+            className={`block p-4 pl-10 w-full text-sm text-white bg-gray-700 rounded-lg border ${
+              invalidInput ? "border-red-600" : "border-gray-600"
+            } placeholder-gray-400`}
             placeholder="City"
           />
           <button

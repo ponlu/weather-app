@@ -1,18 +1,18 @@
 import { useState } from "react";
-import { IForecastResponse, IForecastList } from "../interfaces/IForecastResponse";
-import { addDays, getIPhoneFormattedDate } from "../lib/helper";
+import { IForecastResponse, IForecast } from "../interfaces/IForecastResponse";
+import { addDays, formatDate } from "../lib/helper";
 import Forecast from "./Forecast";
 
 const FORECAST_DAYS = 5;
 
 function ForecastCollection({ forecastResponse }: { forecastResponse: IForecastResponse }) {
-  const day1 = getIPhoneFormattedDate(forecastResponse.list[0].dt_txt);
+  const day1 = formatDate(forecastResponse.list[0].dt_txt);
 
-  const upcomingForecast: IForecastList[][] = new Array(FORECAST_DAYS)
+  const upcomingForecast: IForecast[][] = new Array(FORECAST_DAYS)
     .fill(0)
     .map((_, index) =>
       forecastResponse.list.filter(
-        (forecast) => getIPhoneFormattedDate(forecast.dt_txt).getDate() === addDays(day1, index).getDate()
+        (forecast) => formatDate(forecast.dt_txt).getDate() === addDays(day1, index).getDate()
       )
     );
 

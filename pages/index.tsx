@@ -35,5 +35,3 @@ export async function getServerSideProps(): Promise<{ props: InitialProps }> {
     },
   };
 }
-
-// https://tools.keycdn.com/geo.json?host={IP or hostname}

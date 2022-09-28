@@ -1,16 +1,16 @@
-import { IForecastList } from "../interfaces/IForecastResponse";
-import { capitalizeFirstLetter, getImageFromWeather, getValuesFromForecast } from "../lib/helper";
+import { IForecast } from "../interfaces/IForecastResponse";
+import { capitalizeFirstLetter, getImageFromWeather, getValuesFromForecastList } from "../lib/helper";
 
 function Forecast({
   forecasts,
   selected,
   setSelected,
 }: {
-  forecasts: IForecastList[];
+  forecasts: IForecast[];
   selected: boolean;
   setSelected: () => void;
 }) {
-  const selectedForecast = getValuesFromForecast(forecasts);
+  const selectedForecast = getValuesFromForecastList(forecasts);
 
   return (
     <div
@@ -22,7 +22,7 @@ function Forecast({
       <div className="forecast-today flex flex-col items-center place-content-center overflow-hidden">
         <p>{selectedForecast?.day} </p>
         <p>{capitalizeFirstLetter(selectedForecast?.weather.description)}</p>
-        <p className={`${selected ? "font-bold" : ""}`}>{selectedForecast?.maxTemperature}°</p>
+        <p className={`${selected && "font-bold"}`}>{selectedForecast?.maxTemperature}°</p>
         {selected && <p>{selectedForecast?.minTemperature}°</p>}
         {selected && <p>Feels like {selectedForecast?.feelsLike}°</p>}
         {selected && <p>Rain {selectedForecast?.rain} mm</p>}
